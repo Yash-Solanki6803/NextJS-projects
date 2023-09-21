@@ -1,11 +1,13 @@
-type User = {
+import User from "@/component/user";
+
+type UserType = {
   id: number;
   name: string;
   email: string;
 };
 
 type UserListProps = {
-  users: User[];
+  users: UserType[];
 };
 
 const UserList: React.FC<UserListProps> = ({ users }) => {
@@ -15,8 +17,7 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
       {users?.map((user) => {
         return (
           <div key={user.id}>
-            <p>{user.name}</p>
-            <p>{user.email}</p>
+            <User user={user} />
           </div>
         );
       })}
