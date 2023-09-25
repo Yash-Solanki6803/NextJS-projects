@@ -1,13 +1,8 @@
 import User from "@/component/user";
-
-type UserType = {
-  id: number;
-  name: string;
-  email: string;
-};
+import { UserParams } from "@/component/user";
 
 type UserListProps = {
-  users: UserType[];
+  users: UserParams[];
 };
 
 const UserList: React.FC<UserListProps> = ({ users }) => {
@@ -17,7 +12,7 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
       {users?.map((user) => {
         return (
           <div key={user.id}>
-            <User user={user} />
+            <User {...user} />
           </div>
         );
       })}
@@ -26,12 +21,15 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
 };
 
 export async function getStaticProps() {
+  console.log("Generating/Regenerating UserList");
+
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await res.json();
   return {
     props: {
       users: data,
     },
+    revalidate: 10,
   };
 }
 

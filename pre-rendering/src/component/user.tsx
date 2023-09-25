@@ -1,15 +1,14 @@
-type UserParams = {
-  user: {
-    name: string;
-    email: string;
-  };
+export type UserParams = {
+  id: number;
+  name: string;
+  email: string;
 };
 
-const User: React.FC<UserParams> = ({ user }) => {
+const User: React.FC<UserParams> = ({ name, email }) => {
   return (
     <>
-      <p>{user.name}</p>
-      <p>{user.email}</p>
+      <p>{name}</p>
+      <p>{email}</p>
     </>
   );
 };
